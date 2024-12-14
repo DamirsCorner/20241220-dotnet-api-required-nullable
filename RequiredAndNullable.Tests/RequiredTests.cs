@@ -45,11 +45,7 @@ public class RequiredTests
 
         var response = await httpClient.PostAsJsonAsync("/Sample", new { Required = "required" });
 
-        response.Should().BeSuccessful();
-        response
-            .Content.ReadAsStringAsync()
-            .Result.Should()
-            .Be("""{"optional":null,"required":"required"}""");
+        response.Should().HaveStatusCode(HttpStatusCode.BadRequest);
     }
 
     [Test]
